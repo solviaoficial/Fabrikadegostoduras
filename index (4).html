@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fabrika das Gostosuras — Salgados em Diadema</title>
+<meta name="description" content="Fabrika das Gostosuras: salgados fritos e assados, mini churros, kit festa e linha VEG em Diadema/SP. Pronta entrega e encomendas de terça a domingo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --lilac:#EBDDFC; --lilac2:#DCC6F8; --purple:#7B2CBF; --deep:#33104F; --ink:#1E0A2E;
+  --gold:#F4A52A; --gold2:#E08A12; --dough:#F3E2C4; --paper:#FFFBF2; --wa:#25D366;
+  --fd:'Unbounded',system-ui,sans-serif; --fb:'DM Sans',system-ui,sans-serif; --fm:'DM Mono',ui-monospace,monospace; --fh:'Caveat',cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--fb);background:var(--lilac);color:var(--ink);overflow-x:hidden;line-height:1.5}
+a{color:inherit}
+.hand{font-family:var(--fh);font-weight:700;color:var(--purple)}
+.wa-ico{width:18px;height:18px;flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-weight:700;font-size:16px;padding:17px 24px;border-radius:999px;border:2px solid var(--ink);cursor:pointer;font-family:inherit;transition:transform .2s, box-shadow .2s;box-shadow:4px 4px 0 var(--ink)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.wa{background:var(--wa);color:#fff}
+.btn.ghost{background:var(--paper)}
+
+/* top bar */
+.bar{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;padding:14px 4vw;pointer-events:none}
+.bar>*{pointer-events:auto}
+.logo{font-family:var(--fd);font-weight:900;font-size:15px;letter-spacing:-.02em;line-height:.95;text-transform:uppercase;background:var(--paper);border:2px solid var(--ink);padding:9px 14px;border-radius:14px;box-shadow:3px 3px 0 var(--ink);text-decoration:none}
+.logo small{display:block;font-size:9px;letter-spacing:.12em;color:var(--purple)}
+.bar .order{font-weight:700;font-size:14px;text-decoration:none;background:var(--wa);color:#fff;border:2px solid var(--ink);padding:11px 16px;border-radius:999px;box-shadow:3px 3px 0 var(--ink);display:flex;gap:8px;align-items:center}
+
+/* relógio fixo */
+.clock{position:fixed;left:4vw;bottom:18px;z-index:80;display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border-radius:999px;padding:8px 16px 8px 8px;font-family:var(--fm);font-size:15px;opacity:0;transform:translateY(20px);transition:opacity .4s,transform .4s}
+.clock.on{opacity:1;transform:none}
+.clock .face{width:30px;height:30px;border-radius:50%;background:var(--gold);position:relative}
+.clock .face i{position:absolute;left:50%;top:50%;width:2px;background:var(--ink);transform-origin:50% 100%;border-radius:2px}
+.clock .face .h{height:8px;margin:-8px 0 0 -1px}
+.clock .face .m{height:11px;margin:-11px 0 0 -1px}
+.clock small{opacity:.6;font-size:11px;letter-spacing:.1em}
+
+/* ===== HERO ===== */
+#hero{min-height:100vh;min-height:100svh;position:relative;padding:120px 4vw 60px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.flour{position:absolute;inset:0;pointer-events:none}
+.flour i{position:absolute;width:6px;height:6px;border-radius:50%;background:#fff;opacity:.7;filter:blur(1px)}
+.hero-time{font-family:var(--fd);font-weight:900;font-size:clamp(110px,26vw,380px);line-height:.8;letter-spacing:-.06em;color:rgba(123,44,191,.13);position:absolute;top:13vh;right:-1vw;user-select:none}
+.hero-h{font-family:var(--fd);font-weight:900;text-transform:uppercase;font-size:clamp(40px,8.6vw,132px);line-height:.88;letter-spacing:-.045em;position:relative;z-index:2}
+.hero-h .line{display:block;overflow:hidden}
+.hero-h .line>span{display:inline-block}
+.hero-h .p{color:var(--purple)}
+.hero-sub{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:28px;position:relative;z-index:2}
+.hero-sub p{max-width:440px;font-size:clamp(16px,1.4vw,19px)}
+.hero-sub .hand{font-size:28px;transform:rotate(-4deg)}
+.hero-m{position:absolute;right:12vw;bottom:24vh;width:clamp(110px,14vw,190px);z-index:3}
+.sticker{position:absolute;width:clamp(110px,12vw,170px);aspect-ratio:1;z-index:3}
+.sticker svg{width:100%;height:100%}
+.st1{left:52%;top:18vh}
+.st2{left:6vw;top:24vh;width:clamp(80px,8vw,120px)}
+
+/* marquee */
+.marquee{background:var(--ink);color:var(--paper);overflow:hidden;border-block:2px solid var(--ink);transform:rotate(-2deg);margin:0 -2vw;position:relative;z-index:5}
+.marquee.alt{background:var(--gold);color:var(--ink);transform:rotate(1.5deg);margin-top:-8px}
+.mrow{display:flex;white-space:nowrap;font-family:var(--fd);font-weight:900;text-transform:uppercase;font-size:clamp(26px,4vw,54px);letter-spacing:-.02em;padding:14px 0;will-change:transform}
+.mrow span{padding-right:.5em}
+.mrow b{color:var(--gold);font-weight:900;padding-right:.5em}
+.marquee.alt .mrow b{color:var(--purple)}
+
+/* ===== JORNADA ===== */
+#jornada{position:relative;padding:18vh 0 10vh}
+.j-intro{text-align:center;padding:0 6vw 10vh}
+.j-intro .hand{font-size:30px}
+.j-intro h2{font-family:var(--fd);font-weight:900;text-transform:uppercase;letter-spacing:-.04em;line-height:.9;font-size:clamp(34px,6vw,86px);margin-top:10px}
+.j-intro h2 span{color:var(--purple)}
+#routeSvg{position:absolute;left:0;top:0;width:100%;pointer-events:none;overflow:visible}
+#route{fill:none;stroke:var(--purple);stroke-width:3;stroke-linecap:round;stroke-dasharray:2 12}
+#routeGhost{fill:none;stroke:rgba(123,44,191,.12);stroke-width:3;stroke-linecap:round;stroke-dasharray:2 12}
+.traveler{position:absolute;left:0;top:0;width:clamp(78px,9vw,130px);z-index:4;pointer-events:none}
+.stop{position:relative;min-height:88vh;display:flex;align-items:center;padding:0 6vw}
+.stop .txt{width:min(560px,62%)}
+.stop.r{justify-content:flex-end}
+.stop .time{font-family:var(--fd);font-weight:900;font-size:clamp(64px,10vw,150px);line-height:.85;letter-spacing:-.06em;color:rgba(30,10,46,.14);transition:color .5s}
+.stop.active .time{color:var(--purple)}
+.stop h3{font-family:var(--fd);font-weight:800;font-size:clamp(24px,2.8vw,40px);line-height:1.02;letter-spacing:-.03em;margin:14px 0 12px;text-transform:uppercase}
+.stop p{font-size:clamp(16px,1.3vw,18.5px);max-width:460px}
+.stop .note{display:inline-block;margin-top:14px;font-size:24px;transform:rotate(-3deg)}
+.stop .tag{display:inline-block;font-family:var(--fm);font-size:12px;letter-spacing:.12em;text-transform:uppercase;background:var(--paper);border:2px solid var(--ink);border-radius:999px;padding:5px 12px;margin-bottom:16px}
+
+/* ===== CARDÁPIO ===== */
+#cardapio{background:var(--paper);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:16vh 6vw 14vh;position:relative}
+.sec-k{font-family:var(--fm);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple)}
+.sec-h{font-family:var(--fd);font-weight:900;text-transform:uppercase;letter-spacing:-.045em;line-height:.88;font-size:clamp(40px,7vw,104px);margin:12px 0 10px}
+.sec-h span{color:var(--purple)}
+.menu{margin-top:8vh;border-top:2px solid var(--ink)}
+.row{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;padding:22px 0;border-bottom:2px solid var(--ink);cursor:default;position:relative}
+.row .ic{width:58px;height:58px}
+.row .nm{font-family:var(--fd);font-weight:800;font-size:clamp(22px,3.6vw,52px);letter-spacing:-.035em;text-transform:uppercase;line-height:1;transition:transform .35s cubic-bezier(.2,.8,.2,1),color .3s}
+.row .nm small{display:block;font-family:var(--fb);font-weight:500;text-transform:none;letter-spacing:0;font-size:15px;color:#6c5a78;margin-top:6px}
+.row .cat{font-family:var(--fm);font-size:12px;letter-spacing:.12em;text-transform:uppercase;border:2px solid var(--ink);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.row:hover .nm{transform:translateX(16px);color:var(--purple)}
+.row.veg .cat{background:#BFE6A8}.row.doce .cat{background:var(--lilac2)}.row.forno .cat{background:#FFE0A8}.row.frito .cat{background:var(--gold)}
+.floaty{position:fixed;left:0;top:0;width:180px;height:180px;pointer-events:none;z-index:60;opacity:0;transform:translate(-50%,-50%) scale(.5)}
+
+/* ===== COMANDA ===== */
+#comanda{padding:16vh 6vw;display:grid;grid-template-columns:1fr 440px;gap:6vw;align-items:start;max-width:1300px;margin:0 auto}
+.items{margin-top:5vh;display:grid;gap:12px}
+.item{display:flex;align-items:center;gap:16px;background:var(--paper);border:2px solid var(--ink);border-radius:20px;padding:12px 14px;box-shadow:4px 4px 0 var(--ink)}
+.item .ic{width:46px;height:46px;flex:none}
+.item .nm{flex:1;font-weight:700;font-size:17px;line-height:1.15}
+.item .nm small{display:block;font-weight:400;font-size:13px;color:#6c5a78}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:38px;height:38px;border-radius:12px;border:2px solid var(--ink);background:var(--lilac);font-size:20px;font-weight:700;cursor:pointer;color:var(--ink)}
+.qty output{min-width:44px;text-align:center;font-family:var(--fm);font-weight:500;font-size:17px}
+.opts{margin-top:28px;display:grid;gap:16px}
+.opts label{font-family:var(--fm);font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:2px solid var(--ink);background:var(--paper);border-radius:999px;padding:9px 16px;font:inherit;font-weight:500;cursor:pointer;color:var(--ink)}
+.chip.on{background:var(--ink);color:#fff}
+.opts input{font:inherit;font-size:16px;border:2px solid var(--ink);border-radius:14px;padding:12px 14px;background:var(--paper);width:100%;max-width:320px;color:var(--ink)}
+.receipt-wrap{position:sticky;top:90px}
+.receipt{background:var(--paper);font-family:var(--fm);font-size:14px;padding:28px 24px 40px;position:relative;filter:drop-shadow(6px 8px 0 rgba(30,10,46,.9));
+  -webkit-mask:linear-gradient(#000,#000) top/100% calc(100% - 12px) no-repeat,radial-gradient(circle at 10px 0,transparent 0 7px,#000 7.5px) bottom/20px 12px repeat-x;
+  mask:linear-gradient(#000,#000) top/100% calc(100% - 12px) no-repeat,radial-gradient(circle at 10px 0,transparent 0 7px,#000 7.5px) bottom/20px 12px repeat-x}
+.receipt .rh{text-align:center;border-bottom:1.5px dashed var(--ink);padding-bottom:14px;margin-bottom:12px}
+.receipt .rh b{font-family:var(--fd);font-weight:900;font-size:22px;letter-spacing:-.03em;display:block}
+.receipt .rh span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.rlines{min-height:60px}
+.rline{display:flex;justify-content:space-between;gap:10px;padding:5px 0;overflow:hidden}
+.rline.new{animation:print .45s ease-out}
+@keyframes print{from{max-height:0;opacity:0;transform:translateY(-8px)}to{max-height:40px;opacity:1}}
+.rempty{opacity:.5;text-align:center;padding:14px 0}
+.rtot{border-top:1.5px dashed var(--ink);margin-top:10px;padding-top:12px;display:flex;justify-content:space-between;font-weight:500;font-size:16px}
+.rmeta{margin-top:10px;font-size:12.5px;opacity:.8;line-height:1.7}
+.receipt .btn{width:100%;margin-top:20px;font-family:var(--fb)}
+.rfine{font-size:11px;opacity:.55;text-align:center;margin-top:10px}
+
+/* ===== FINAL ===== */
+#final{background:var(--deep);color:var(--paper);padding:16vh 6vw 8vh;position:relative;overflow:hidden;text-align:center}
+#final .hand{color:var(--gold);font-size:30px}
+#final h2{font-family:var(--fd);font-weight:900;text-transform:uppercase;letter-spacing:-.045em;line-height:.9;font-size:clamp(36px,6.4vw,96px);margin:14px auto 0;max-width:1100px}
+#final h2 .g{color:var(--gold)}
+#final h2 .o{color:var(--lilac2);opacity:.45}
+.final-m{width:clamp(150px,18vw,240px);margin:7vh auto 6vh}
+.final-btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+#final .btn{border-color:var(--paper);box-shadow:4px 4px 0 var(--gold)}
+#final .btn.ghost{background:transparent;color:var(--paper)}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:980px;margin:10vh auto 0;text-align:left}
+.info div{border-top:2px solid rgba(255,255,255,.2);padding-top:14px;font-size:15px;opacity:.85}
+.info b{display:block;font-family:var(--fm);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.info a{text-decoration:none}
+footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;padding:22px;font-size:12.5px}
+.trail{position:fixed;width:44px;height:44px;pointer-events:none;z-index:70;left:0;top:0}
+
+@media (max-width:900px){
+  .hero-time{top:12vh;right:-4vw}
+  .hero-m{right:6vw;bottom:auto;top:38vh;width:110px}
+  .st1{left:auto;right:4vw;top:auto;bottom:4vh;width:100px}
+  .st2{display:none}
+  .stop{min-height:78vh;padding:0 5vw}
+  .stop .txt{width:70%}
+  #comanda{grid-template-columns:1fr}
+  .receipt-wrap{position:relative;top:0}
+  .info{grid-template-columns:1fr}
+  .row{grid-template-columns:auto 1fr;gap:14px}
+  .row .cat{grid-column:2;justify-self:start;margin-top:-6px}
+  .row .ic{width:46px;height:46px;grid-row:span 2}
+  .bar .order span{display:none}
+  .clock{bottom:14px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <radialGradient id="gGold" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#FFD486"/><stop offset=".55" stop-color="#E39431"/><stop offset="1" stop-color="#A9591A"/></radialGradient>
+    <radialGradient id="gKib" cx="38%" cy="35%" r="70%"><stop offset="0" stop-color="#C98543"/><stop offset=".6" stop-color="#8E4E1F"/><stop offset="1" stop-color="#5F3112"/></radialGradient>
+    <radialGradient id="gQue" cx="38%" cy="32%" r="70%"><stop offset="0" stop-color="#FFE3A1"/><stop offset=".6" stop-color="#EDB24F"/><stop offset="1" stop-color="#BF7A26"/></radialGradient>
+    <radialGradient id="gEsf" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="#FBE2B2"/><stop offset=".7" stop-color="#E7B46A"/><stop offset="1" stop-color="#C58A3E"/></radialGradient>
+    <linearGradient id="gChu" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#E9A45A"/><stop offset="1" stop-color="#9B551C"/></linearGradient>
+    <pattern id="crumb" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r="1.1" fill="#fff3d6" opacity=".6"/><circle cx="6.5" cy="7" r="1" fill="#7a3d10" opacity=".35"/><circle cx="7.5" cy="2" r=".7" fill="#fff3d6" opacity=".45"/></pattern>
+    <symbol id="i-coxinha" viewBox="0 0 100 100"><path d="M50 6C58 21 82 44 82 67a32 27 0 0 1-64 0C18 44 42 21 50 6Z" fill="url(#gGold)" stroke="#1E0A2E" stroke-width="3"/><path d="M50 6C58 21 82 44 82 67a32 27 0 0 1-64 0C18 44 42 21 50 6Z" fill="url(#crumb)"/></symbol>
+    <symbol id="i-kibe" viewBox="0 0 100 100"><path d="M6 50C20 26 80 26 94 50C80 74 20 74 6 50Z" fill="url(#gKib)" stroke="#1E0A2E" stroke-width="3"/><path d="M6 50C20 26 80 26 94 50C80 74 20 74 6 50Z" fill="url(#crumb)"/></symbol>
+    <symbol id="i-queijo" viewBox="0 0 100 100"><circle cx="50" cy="52" r="36" fill="url(#gQue)" stroke="#1E0A2E" stroke-width="3"/><circle cx="50" cy="52" r="36" fill="url(#crumb)"/></symbol>
+    <symbol id="i-risole" viewBox="0 0 100 100"><path d="M10 66a40 40 0 0 1 80 0Z" fill="url(#gGold)" stroke="#1E0A2E" stroke-width="3" stroke-linejoin="round"/><path d="M10 66a40 40 0 0 1 80 0Z" fill="url(#crumb)"/></symbol>
+    <symbol id="i-esfiha" viewBox="0 0 100 100"><path d="M50 10L90 82H10Z" fill="url(#gEsf)" stroke="#1E0A2E" stroke-width="3" stroke-linejoin="round"/><circle cx="44" cy="62" r="2.4" fill="#b56a2a"/><circle cx="58" cy="54" r="2" fill="#b56a2a"/></symbol>
+    <symbol id="i-aberta" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="url(#gEsf)" stroke="#1E0A2E" stroke-width="3"/><circle cx="50" cy="50" r="29" fill="#B4442A"/><g fill="#7a2516"><circle cx="40" cy="44" r="3.4"/><circle cx="58" cy="40" r="3.4"/><circle cx="54" cy="60" r="3.4"/></g><g fill="#6f9a3b"><circle cx="47" cy="52" r="2.4"/><circle cx="62" cy="52" r="2"/></g></symbol>
+    <symbol id="i-churros" viewBox="0 0 100 100"><g transform="rotate(-35 50 50)"><rect x="12" y="38" width="76" height="24" rx="12" fill="url(#gChu)" stroke="#1E0A2E" stroke-width="3"/><g stroke="#7b3f12" stroke-width="2" opacity=".55"><path d="M20 45h60M20 50h60M20 55h60"/></g><g fill="#fff"><circle cx="30" cy="43" r="1.4"/><circle cx="46" cy="57" r="1.4"/><circle cx="60" cy="44" r="1.4"/><circle cx="72" cy="55" r="1.4"/></g></g></symbol>
+    <symbol id="i-veg" viewBox="0 0 100 100"><circle cx="50" cy="52" r="36" fill="url(#gEsf)" stroke="#1E0A2E" stroke-width="3"/><path d="M50 28c13 7 15 22 0 36-15-14-13-29 0-36Z" fill="#6FA83A" stroke="#1E0A2E" stroke-width="2.5"/></symbol>
+    <symbol id="i-kit" viewBox="0 0 100 100"><path d="M14 40h72v44a6 6 0 0 1-6 6H20a6 6 0 0 1-6-6Z" fill="#7B2CBF" stroke="#1E0A2E" stroke-width="3"/><path d="M8 30h84v12H8Z" fill="#9D5BE0" stroke="#1E0A2E" stroke-width="3"/><path d="M50 30v60" stroke="#F4A52A" stroke-width="6"/><path d="M50 30c-10-16-26-12-22-2 2 5 14 4 22 2Zm0 0c10-16 26-12 22-2-2 5-14 4-22 2Z" fill="#F4A52A" stroke="#1E0A2E" stroke-width="2.5"/></symbol>
+  </defs>
+</svg>
+
+<template id="mascotTpl">
+  <svg viewBox="0 0 120 150" class="mascot">
+    <defs><mask id="MASKID" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="150"><rect width="120" height="150" fill="#fff"/><g class="bite" fill="#000"><circle cx="99" cy="56" r="0"/><circle cx="92" cy="40" r="0"/><circle cx="103" cy="73" r="0"/></g></mask></defs>
+    <g class="cup" opacity="0"><path d="M18 108h84l-9 34H27Z" fill="#7B2CBF" stroke="#1E0A2E" stroke-width="3" stroke-linejoin="round"/><path d="M30 108l3 34M44 108l2 34M60 108v34M76 108l-2 34M90 108l-3 34" stroke="#9D5BE0" stroke-width="3"/></g>
+    <g class="body" mask="url(#MASKID)">
+      <path d="M60 8C71 28 102 58 102 90a42 36 0 0 1-84 0C18 58 49 28 60 8Z" fill="#F3E2C4" stroke="#1E0A2E" stroke-width="3.5"/>
+      <path class="gold" opacity="0" d="M60 8C71 28 102 58 102 90a42 36 0 0 1-84 0C18 58 49 28 60 8Z" fill="url(#gGold)" stroke="#1E0A2E" stroke-width="3.5"/>
+      <path class="crumbs" opacity="0" d="M60 8C71 28 102 58 102 90a42 36 0 0 1-84 0C18 58 49 28 60 8Z" fill="url(#crumb)"/>
+      <ellipse cx="46" cy="58" rx="7" ry="13" fill="#fff" opacity=".35" transform="rotate(18 46 58)"/>
+    </g>
+    <g class="face">
+      <g class="eyes"><ellipse cx="47" cy="88" rx="4.6" ry="6" fill="#1E0A2E"/><ellipse cx="73" cy="88" rx="4.6" ry="6" fill="#1E0A2E"/><circle cx="48.5" cy="86" r="1.6" fill="#fff"/><circle cx="74.5" cy="86" r="1.6" fill="#fff"/></g>
+      <g class="happy" opacity="0" stroke="#1E0A2E" stroke-width="3.5" fill="none" stroke-linecap="round"><path d="M41 89q6-7 12 0"/><path d="M67 89q6-7 12 0"/></g>
+      <ellipse cx="39" cy="99" rx="6" ry="3.5" fill="#F07CA8" opacity=".7"/><ellipse cx="81" cy="99" rx="6" ry="3.5" fill="#F07CA8" opacity=".7"/>
+      <path class="mouth" d="M53 100q7 7 14 0" stroke="#1E0A2E" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    </g>
+  </svg>
+</template>
+
+<header class="bar">
+  <a class="logo" href="#hero"><small>a sua</small>Fabrika</a>
+  <a class="order wa-link" href="#" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" fill="#fff"><use href="#waPath"/></svg><span>Fazer pedido</span></a>
+</header>
+
+<div class="clock" id="clock"><div class="face"><i class="h" id="hh"></i><i class="m" id="mm"></i></div><span id="ctime">06:00</span><small id="clabel">a massa</small></div>
+
+<!-- ============ HERO ============ -->
+<section id="hero">
+  <div class="flour" id="flour"></div>
+  <div class="hero-time" aria-hidden="true">6:00</div>
+  <div class="sticker st1" id="st1"><svg viewBox="0 0 200 200"><defs><path id="circ" d="M100 100m-74 0a74 74 0 1 1 148 0a74 74 0 1 1-148 0"/></defs><circle cx="100" cy="100" r="98" fill="#F4A52A" stroke="#1E0A2E" stroke-width="3"/><text font-family="Unbounded" font-weight="800" font-size="17" letter-spacing="3" fill="#1E0A2E"><textPath href="#circ">A SUA FABRIKA ✺ SALGADOS EM DIADEMA ✺ </textPath></text><g transform="translate(64 62) scale(.72)"><use href="#i-coxinha" width="100" height="100"/></g></svg></div>
+  <div class="sticker st2" id="st2"><svg viewBox="0 0 200 200"><path d="M100 6l22 30 36-8 4 36 32 18-20 30 20 30-32 18-4 36-36-8-22 30-22-30-36 8-4-36-32-18 20-30-20-30 32-18 4-36 36 8Z" fill="#BFE6A8" stroke="#1E0A2E" stroke-width="4"/><text x="100" y="96" text-anchor="middle" font-family="Unbounded" font-weight="900" font-size="34" fill="#1E0A2E">TEM</text><text x="100" y="134" text-anchor="middle" font-family="Unbounded" font-weight="900" font-size="34" fill="#1E0A2E">VEG</text></svg></div>
+  <div class="hero-m" id="heroMascot"></div>
+  <h1 class="hero-h">
+    <span class="line"><span>Às 6 da manhã,</span></span>
+    <span class="line"><span>ela ainda era</span></span>
+    <span class="line"><span class="p">só farinha.</span></span>
+  </h1>
+  <div class="hero-sub">
+    <p>Esta é a história de um dia na Fabrika das Gostosuras — e de como uma coxinha sai da farinha e chega na sua festa.</p>
+    <span class="hand">role e acompanhe ela ↓</span>
+  </div>
+</section>
+
+<div class="marquee"><div class="mrow" id="m1"></div></div>
+<div class="marquee alt"><div class="mrow" id="m2"></div></div>
+
+<!-- ============ JORNADA ============ -->
+<section id="jornada">
+  <div class="j-intro">
+    <div class="hand">um dia na fabrika</div>
+    <h2>Do saco de farinha<br>até a <span>sua mesa.</span></h2>
+  </div>
+  <svg id="routeSvg"><defs><mask id="routeMask"><path id="routeReveal" fill="none" stroke="#fff" stroke-width="24" stroke-linecap="round"/></mask></defs><path id="routeGhost"/><path id="route" mask="url(#routeMask)"/></svg>
+  <div class="traveler" id="traveler"></div>
+
+  <div class="stop" data-t="06:00" data-l="a massa">
+    <div class="txt">
+      <span class="tag">etapa 01</span>
+      <div class="time">06:00</div>
+      <h3>A massa acorda cedo</h3>
+      <p>Enquanto Diadema ainda dorme, a Fabrika já está de luz acesa. A massa é feita ali mesmo, no dia — nada de salgado esquecido no freezer.</p>
+      <span class="hand note">feito hoje, pra hoje</span>
+    </div>
+  </div>
+  <div class="stop r" data-t="07:30" data-l="o recheio">
+    <div class="txt">
+      <span class="tag">etapa 02</span>
+      <div class="time">07:30</div>
+      <h3>Recheio sem economia</h3>
+      <p>Cada salgado ganha o seu recheio caprichado. Daqueles que você morde e encontra recheio — não só massa.</p>
+      <span class="hand note">pode morder sem medo</span>
+    </div>
+  </div>
+  <div class="stop" data-t="09:00" data-l="a modelagem">
+    <div class="txt">
+      <span class="tag">etapa 03</span>
+      <div class="time">09:00</div>
+      <h3>Uma a uma, na mão</h3>
+      <p>Modelados um por um e empanados no formato que todo mundo reconhece de longe: coxinha, kibe, risole, bolinha de queijo.</p>
+      <span class="hand note">tem até a pontinha</span>
+    </div>
+  </div>
+  <div class="stop r" data-t="11:00" data-l="o banho dourado">
+    <div class="txt">
+      <span class="tag">etapa 04</span>
+      <div class="time">11:00</div>
+      <h3>O banho dourado</h3>
+      <p>Os fritos vão pro óleo até ficarem crocantes por fora. Os assados vão pro forno. E os mini churros ganham açúcar e canela.</p>
+      <span class="hand note">crec.</span>
+    </div>
+  </div>
+  <div class="stop" data-t="13:00" data-l="a caixa">
+    <div class="txt">
+      <span class="tag">etapa 05</span>
+      <div class="time">13:00</div>
+      <h3>Direto pra caixa</h3>
+      <p>Pronta entrega pra quem quer agora, ou kit festa montado com hora marcada. De terça a domingo.</p>
+      <span class="hand note">quentinha ainda</span>
+    </div>
+  </div>
+  <div class="stop r" data-t="15:00" data-l="a festa">
+    <div class="txt">
+      <span class="tag">etapa 06</span>
+      <div class="time">15:00</div>
+      <h3>"Ainda tem coxinha?"</h3>
+      <p>Na sua festa, ela é a primeira a sumir da mesa. Missão cumprida.</p>
+      <span class="hand note">nhac.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CARDÁPIO ============ -->
+<section id="cardapio">
+  <div class="sec-k">O que sai da Fabrika</div>
+  <h2 class="sec-h">Cardápio<br>da <span>casa</span></h2>
+  <p style="max-width:520px;font-size:18px">Fritos, assados, doces e linha VEG. Passe o dedo (ou o mouse) e escolha os seus.</p>
+  <div class="menu">
+    <div class="row frito" data-i="coxinha"><svg class="ic"><use href="#i-coxinha"/></svg><div class="nm">Coxinha<small>A clássica, crocante por fora e cremosa por dentro.</small></div><span class="cat">frito</span></div>
+    <div class="row frito" data-i="kibe"><svg class="ic"><use href="#i-kibe"/></svg><div class="nm">Kibe<small>Temperado, sequinho, do jeito certo.</small></div><span class="cat">frito</span></div>
+    <div class="row frito" data-i="risole"><svg class="ic"><use href="#i-risole"/></svg><div class="nm">Risole<small>Meia-lua dourada com recheio cremoso.</small></div><span class="cat">frito</span></div>
+    <div class="row frito" data-i="queijo"><svg class="ic"><use href="#i-queijo"/></svg><div class="nm">Bolinha de queijo<small>Aquela que puxa queijo na primeira mordida.</small></div><span class="cat">frito</span></div>
+    <div class="row forno" data-i="esfiha"><svg class="ic"><use href="#i-esfiha"/></svg><div class="nm">Assados<small>Esfihas e salgados de forno, massa leve.</small></div><span class="cat">assado</span></div>
+    <div class="row doce" data-i="churros"><svg class="ic"><use href="#i-churros"/></svg><div class="nm">Mini churros<small>Açúcar, canela e recheio. O doce que fecha a festa.</small></div><span class="cat">doce</span></div>
+    <div class="row veg" data-i="veg"><svg class="ic"><use href="#i-veg"/></svg><div class="nm">Linha VEG<small>Opções veganas e vegetarianas.</small></div><span class="cat">veg</span></div>
+    <div class="row" data-i="kit"><svg class="ic"><use href="#i-kit"/></svg><div class="nm">Kit festa<small>Salgados e churros prontos pra servir, com hora marcada.</small></div><span class="cat" style="background:var(--lilac2)">festa</span></div>
+  </div>
+  <svg class="floaty" id="floaty"><use id="floatyUse" href="#i-coxinha"/></svg>
+</section>
+
+<!-- ============ COMANDA ============ -->
+<section id="comanda">
+  <div>
+    <div class="sec-k">Sua vez</div>
+    <h2 class="sec-h">Monte a<br>sua <span>comanda</span></h2>
+    <p style="max-width:520px;font-size:18px">Escolha as quantidades. A comanda ao lado vai imprimindo — e vai direto pro WhatsApp da Fabrika.</p>
+    <div class="items" id="items"></div>
+    <div class="opts">
+      <div><label>Como você quer receber?</label><div class="chips" data-k="receber"><button class="chip">Retirada</button><button class="chip">Entrega</button></div></div>
+      <div><label>Pra quando?</label><input type="date" id="data"></div>
+      <div><label>Seu nome</label><input type="text" id="nome" placeholder="Como podemos te chamar?"></div>
+    </div>
+  </div>
+  <div class="receipt-wrap">
+    <div class="receipt" id="receipt">
+      <div class="rh"><b>FABRIKA</b><span>das gostosuras · comanda nº <span id="rn">0001</span></span></div>
+      <div class="rlines" id="rlines"><div class="rempty">escolha seus salgados ←</div></div>
+      <div class="rtot"><span>TOTAL</span><span id="rtotal">0 un.</span></div>
+      <div class="rmeta" id="rmeta"></div>
+      <a class="btn wa wa-link" href="#" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" fill="#fff"><use href="#waPath"/></svg>Enviar comanda</a>
+      <div class="rfine">A Fabrika confirma sabores, valores e horário.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL ============ -->
+<section id="final">
+  <div class="hand">15h, numa festa qualquer em Diadema</div>
+  <h2>Às 6 ela era <span class="o">farinha.</span><br>Às 15h, a <span class="g">melhor parte</span> da festa.</h2>
+  <div class="final-m" id="finalMascot"></div>
+  <div class="final-btns">
+    <a class="btn wa wa-link" href="#" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" fill="#fff"><use href="#waPath"/></svg>Quero a minha amanhã</a>
+    <a class="btn ghost" href="https://www.instagram.com/fabrika.das.gostosuras/" target="_blank" rel="noopener">@fabrika.das.gostosuras</a>
+  </div>
+  <div class="info">
+    <div><b>Onde</b>Diadema · SP<br>Retirada e entrega</div>
+    <div><b>Quando</b>Terça a domingo<br>Pronta entrega & encomendas</div>
+    <div><b>Fale com a gente</b><a class="wa-link" href="#" target="_blank" rel="noopener">WhatsApp (11) 99453-7771</a></div>
+  </div>
+</section>
+<footer>Fabrika das Gostosuras® · Salgados em Diadema/SP · A sua Fabrika 💜</footer>
+
+<svg width="0" height="0" style="position:absolute"><path id="waPath" d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8.1 8.1 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.6.3-.5v-.5c0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.4 13.4 0 0 0 5.2 4.5c2.9 1.1 2.9.8 3.4.7a3 3 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.3M12 21.8a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8M20.5 3.5A11.9 11.9 0 0 0 1.8 17.9L.1 24l6.3-1.7A11.9 11.9 0 0 0 24 12a11.8 11.8 0 0 0-3.5-8.5"/></svg>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+<script>
+const WA='5511994537771';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+let mid=0;function mascot(into){const n=$('#mascotTpl').content.firstElementChild.cloneNode(true);const id='bite'+(++mid);n.querySelector('mask').id=id;n.querySelector('.body').setAttribute('mask',`url(#${id})`);into.appendChild(n);return n;}
+const heroM=mascot($('#heroMascot')), trav=mascot($('#traveler')), finM=mascot($('#finalMascot'));
+// final: dourada, na forminha e mordida
+finM.querySelector('.gold').setAttribute('opacity',1);finM.querySelector('.crumbs').setAttribute('opacity',1);finM.querySelector('.cup').setAttribute('opacity',1);
+
+// farinha
+const fl=$('#flour');for(let i=0;i<26;i++){const d=document.createElement('i');d.style.left=Math.random()*100+'%';d.style.top=Math.random()*100+'%';d.style.transform=`scale(${.4+Math.random()*1.4})`;fl.appendChild(d);}
+
+// marquees
+const words=['Coxinha','Kibe','Risole','Bolinha de queijo','Esfiha','Mini churros','Linha VEG','Kit festa'];
+function fillRow(el,ws){let h='';for(let k=0;k<4;k++)ws.forEach(w=>h+=`<span>${w}</span><b>✺</b>`);el.innerHTML=h;}
+fillRow($('#m1'),words);fillRow($('#m2'),['Feito hoje','Pronta entrega','Encomendas','Ter a Dom','Diadema','A sua Fabrika']);
+
+/* ===== Comanda ===== */
+const ITEMS=[['coxinha','Coxinha','frita'],['kibe','Kibe','frito'],['risole','Risole','frito'],['queijo','Bolinha de queijo','frita'],['esfiha','Assados','esfihas e afins'],['churros','Mini churros','doce'],['veg','Linha VEG','vegano/vegetariano']];
+const q={};const items=$('#items');
+ITEMS.forEach(([k,n,s])=>{q[k]=0;const d=document.createElement('div');d.className='item';
+  d.innerHTML=`<svg class="ic"><use href="#i-${k}"/></svg><div class="nm">${n}<small>${s} · de 25 em 25</small></div><div class="qty"><button type="button" data-d="-25">−</button><output>0</output><button type="button" data-d="25">+</button></div>`;
+  d.querySelectorAll('button').forEach(b=>b.onclick=()=>{q[k]=Math.max(0,Math.min(2000,q[k]+ +b.dataset.d));d.querySelector('output').textContent=q[k];renderR(k);});
+  items.appendChild(d);});
+const ex={receber:''};
+$$('.opts .chips').forEach(c=>c.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{c.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));b.classList.add('on');ex[c.dataset.k]=b.textContent;renderR();}));
+$('#data').oninput=()=>renderR();$('#nome').oninput=()=>renderR();
+let prevKeys=new Set();
+function fmtDate(v){if(!v)return'';const [y,m,d]=v.split('-');return `${d}/${m}/${y}`;}
+function renderR(changed){
+  const lines=$('#rlines');const sel=ITEMS.filter(([k])=>q[k]>0);
+  if(!sel.length){lines.innerHTML='<div class="rempty">escolha seus salgados ←</div>';}
+  else{lines.innerHTML=sel.map(([k,n])=>`<div class="rline ${(!prevKeys.has(k)||k===changed)?'new':''}"><span>${q[k]}x ${n}</span><span>${(q[k]/100).toLocaleString('pt-BR')} ct</span></div>`).join('');}
+  prevKeys=new Set(sel.map(([k])=>k));
+  const tot=sel.reduce((a,[k])=>a+q[k],0);
+  $('#rtotal').textContent=`${tot} un. · ${(tot/100).toLocaleString('pt-BR')} centos`;
+  const meta=[];if(ex.receber)meta.push('Receber: '+ex.receber);if($('#data').value)meta.push('Data: '+fmtDate($('#data').value));if($('#nome').value.trim())meta.push('Nome: '+$('#nome').value.trim());
+  $('#rmeta').innerHTML=meta.join('<br>');
+  $('#rn').textContent=String(1+tot%9999).padStart(4,'0');
+  const m=['Olá, Fabrika! Montei minha comanda pelo site 💜',''];
+  if(sel.length){sel.forEach(([k,n])=>m.push(`• ${q[k]}x ${n}`));m.push(`Total: ${tot} unidades`);}else m.push('Quero fazer um pedido de salgados.');
+  if(meta.length){m.push('');meta.forEach(x=>m.push(x));}
+  m.push('','Pode me passar sabores, valores e disponibilidade?');
+  $$('.wa-link').forEach(a=>a.href='https://wa.me/'+WA+'?text='+encodeURIComponent(m.join('\n')));
+}
+renderR();
+
+/* ===== Motion ===== */
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine=matchMedia('(pointer:fine)').matches;
+if(window.gsap&&window.ScrollTrigger&&window.MotionPathPlugin&&!reduce){
+  gsap.registerPlugin(ScrollTrigger,MotionPathPlugin);
+  ScrollTrigger.config({ignoreMobileResize:true});
+
+  // hero
+  gsap.from('.hero-h .line>span',{yPercent:110,duration:1.1,ease:'power4.out',stagger:.1,delay:.15});
+  gsap.from('.hero-time',{xPercent:20,opacity:0,duration:1.6,ease:'power3.out'});
+  gsap.from('#heroMascot',{y:60,scale:.6,opacity:0,duration:1.2,delay:.6,ease:'back.out(1.8)'});
+  gsap.to('#heroMascot',{y:-14,rotation:4,duration:1.6,yoyo:true,repeat:-1,ease:'sine.inOut',delay:1.8});
+  gsap.from('.sticker',{scale:0,rotation:-90,duration:1,stagger:.15,delay:.5,ease:'back.out(1.6)'});
+  gsap.to('#st1 svg',{rotation:360,ease:'none',scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:.5}});
+  gsap.to('#st2 svg',{rotation:-200,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:.5}});
+  gsap.to('#flour i',{y:()=>-80-Math.random()*160,x:()=>Math.random()*60-30,opacity:0,ease:'none',stagger:.01,scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('.hero-time',{yPercent:30,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('#heroMascot',{opacity:0,scale:.6,ease:'none',scrollTrigger:{trigger:'#hero',start:'60% top',end:'bottom top',scrub:true}});
+
+  // marquees com velocidade da rolagem
+  const m1=gsap.to('#m1',{xPercent:-25,ease:'none',duration:18,repeat:-1});
+  const m2=gsap.fromTo('#m2',{xPercent:-25},{xPercent:0,ease:'none',duration:22,repeat:-1});
+  ScrollTrigger.create({onUpdate:self=>{const v=gsap.utils.clamp(-6,6,self.getVelocity()/300);gsap.to([m1,m2],{timeScale:1+Math.abs(v),duration:.2,overwrite:true});gsap.to([m1,m2],{timeScale:1,duration:1,delay:.25});}});
+
+  // rota da jornada
+  const J=$('#jornada'),svg=$('#routeSvg');
+  function buildRoute(){
+    const W=J.offsetWidth,H=J.offsetHeight,stops=$$('.stop');
+    svg.setAttribute('width',W);svg.setAttribute('height',H);svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.style.height=H+'px';
+    const mob=W<900, pts=[[W/2,$('.j-intro').offsetHeight*.92]];
+    stops.forEach(s=>{const right=!s.classList.contains('r');const y=s.offsetTop+s.offsetHeight/2;pts.push([right?W*(mob?.86:.78):W*(mob?.14:.22),y]);});
+    let d=`M${pts[0][0]},${pts[0][1]}`;
+    for(let i=1;i<pts.length;i++){const [x0,y0]=pts[i-1],[x1,y1]=pts[i];const my=(y1-y0)*.5;d+=` C${x0},${y0+my} ${x1},${y1-my} ${x1},${y1}`;}
+    ['#route','#routeGhost','#routeReveal'].forEach(id=>$(id).setAttribute('d',d));
+    const L=$('#routeReveal').getTotalLength();$('#routeReveal').style.strokeDasharray=L;$('#routeReveal').style.strokeDashoffset=L;
+    return L;
+  }
+  buildRoute();
+  const jt=gsap.timeline({scrollTrigger:{trigger:'#jornada',start:'top 40%',end:()=>'bottom-='+(innerHeight*.5)+' 40%',scrub:1,invalidateOnRefresh:true,onRefreshInit:buildRoute}});
+  jt.to('#traveler',{motionPath:{path:'#route',align:'#route',alignOrigin:[.5,.5]},ease:'none',duration:1},0)
+    .to('#routeReveal',{strokeDashoffset:0,ease:'none',duration:1},0)
+    .to(trav,{scale:1.15,transformOrigin:'50% 70%',duration:.08},.24)
+    .to(trav,{scale:1,duration:.06},.34)
+    .to(trav.querySelector('.crumbs'),{attr:{opacity:1},duration:.1},.42)
+    .to(trav.querySelector('.gold'),{attr:{opacity:1},duration:.12},.6)
+    .to(trav.querySelector('.cup'),{attr:{opacity:1},duration:.08},.78)
+    .to(trav.querySelector('.eyes'),{opacity:0,duration:.03},.93)
+    .to(trav.querySelector('.happy'),{attr:{opacity:1},duration:.03},.93)
+    .to(trav.querySelectorAll('.bite circle'),{attr:{r:(i)=>[13,10,9][i]},duration:.05},.94);
+  // começa sem mordida
+  gsap.set(trav.querySelectorAll('.bite circle'),{attr:{r:0}});gsap.set(heroM.querySelectorAll('.bite circle'),{attr:{r:0}});
+  // etapas ativas + relógio
+  const clock=$('#clock');
+  $$('.stop').forEach(s=>ScrollTrigger.create({trigger:s,start:'top 55%',end:'bottom 55%',toggleClass:'active',onEnter:()=>setClock(s),onEnterBack:()=>setClock(s)}));
+  function setClock(s){$('#ctime').textContent=s.dataset.t;$('#clabel').textContent=s.dataset.l;const [h,m]=s.dataset.t.split(':').map(Number);
+    gsap.to('#hh',{rotation:(h%12)*30+m*.5,duration:.8,ease:'back.out(1.6)'});gsap.to('#mm',{rotation:m*6+h*360,duration:.8,ease:'back.out(1.6)'});}
+  ScrollTrigger.create({trigger:'#jornada',start:'top 50%',end:'bottom 50%',onToggle:e=>clock.classList.toggle('on',e.isActive)});
+  $$('.stop .txt').forEach(t=>gsap.from(t.children,{y:50,opacity:0,duration:1,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:t,start:'top 75%'}}));
+  gsap.from('.j-intro h2',{y:60,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:'.j-intro',start:'top 80%'}});
+
+  // títulos de seção
+  $$('.sec-h').forEach(h=>gsap.from(h,{y:80,opacity:0,skewY:4,duration:1.1,ease:'power4.out',scrollTrigger:{trigger:h,start:'top 85%'}}));
+  gsap.from('.row',{x:-40,opacity:0,duration:.8,stagger:.06,ease:'power3.out',scrollTrigger:{trigger:'.menu',start:'top 80%'}});
+  gsap.from('.item',{y:30,opacity:0,duration:.7,stagger:.06,ease:'power3.out',scrollTrigger:{trigger:'#items',start:'top 85%'}});
+  gsap.from('#receipt',{yPercent:-30,opacity:0,duration:1.1,ease:'power3.out',scrollTrigger:{trigger:'#receipt',start:'top 85%'}});
+
+  // final: mordida acontece quando chega
+  gsap.set(finM.querySelectorAll('.bite circle'),{attr:{r:0}});
+  const ft=gsap.timeline({scrollTrigger:{trigger:'#finalMascot',start:'top 75%'}});
+  ft.from('#finalMascot',{y:80,scale:.6,opacity:0,duration:.9,ease:'back.out(1.7)'})
+    .to(finM.querySelectorAll('.bite circle'),{attr:{r:(i)=>[13,10,9][i]},duration:.25,stagger:.08,ease:'power2.out'},'+=.3')
+    .to(finM.querySelector('.eyes'),{opacity:0,duration:.1},'<')
+    .to(finM.querySelector('.happy'),{attr:{opacity:1},duration:.1},'<')
+    .to('#finalMascot',{rotation:-6,yoyo:true,repeat:3,duration:.12},'<');
+  gsap.from('#final h2',{y:80,opacity:0,duration:1.1,ease:'power4.out',scrollTrigger:{trigger:'#final',start:'top 70%'}});
+
+  // cardápio: salgado segue o cursor (desktop)
+  const fl2=$('#floaty');
+  if(fine){
+    const xTo=gsap.quickTo(fl2,'x',{duration:.5,ease:'power3'}),yTo=gsap.quickTo(fl2,'y',{duration:.5,ease:'power3'});
+    $$('.row').forEach(r=>{r.addEventListener('mouseenter',()=>{$('#floatyUse').setAttribute('href','#i-'+r.dataset.i);gsap.to(fl2,{opacity:1,scale:1,rotation:gsap.utils.random(-20,20),duration:.4});});
+      r.addEventListener('mouseleave',()=>gsap.to(fl2,{opacity:0,scale:.5,duration:.3}));});
+    $('#cardapio').addEventListener('mousemove',e=>{xTo(e.clientX+110);yTo(e.clientY-40);});
+    // rastro de salgadinhos no hero
+    const kinds=['coxinha','kibe','queijo','risole','churros','esfiha'];let last=0;
+    $('#hero').addEventListener('mousemove',e=>{const now=performance.now();if(now-last<90)return;last=now;
+      const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('class','trail');s.innerHTML=`<use href="#i-${kinds[Math.floor(Math.random()*kinds.length)]}"/>`;document.body.appendChild(s);
+      gsap.fromTo(s,{x:e.clientX-22,y:e.clientY-22,scale:.3,rotation:gsap.utils.random(-40,40)},{scale:1,duration:.3,ease:'back.out(2)'});
+      gsap.to(s,{y:'+=120',opacity:0,rotation:'+=90',duration:1,delay:.35,ease:'power2.in',onComplete:()=>s.remove()});});
+  }
+}else{
+  $('#clock').classList.add('on');
+}
+</script>
+</body>
+</html>
